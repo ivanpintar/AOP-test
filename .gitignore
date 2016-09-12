@@ -46,5 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
  
-AOP-test/bin/*
-AOP-test/obj/*
+bin/
+obj/
+packages/

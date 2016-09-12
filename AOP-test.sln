@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOPTest.Console", "AOPTest.Console\AOPTest.Console.csproj", "{5A8CDB9E-448C-4D9A-82CF-4E61F8239857}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOPTest.Domain", "AOPTest.Domain\AOPTest.Domain.csproj", "{1D366AE2-610F-4959-B720-D810D6CA6551}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOPTest.Data", "AOPTest.Data\AOPTest.Data.csproj", "{E2B68120-F7FC-481D-807C-1DC85A70C789}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOPTest.Helpers", "AOPTest.Helpers\AOPTest.Helpers.csproj", "{C7531DA4-B34A-430F-A7B1-ECF5BC23585E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOPTest.AutofacInterception", "AOPTest.AutofacInterception\AOPTest.AutofacInterception.csproj", "{5A8CDB9E-448C-4D9A-82CF-4E61F8239857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +17,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D366AE2-610F-4959-B720-D810D6CA6551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D366AE2-610F-4959-B720-D810D6CA6551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D366AE2-610F-4959-B720-D810D6CA6551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D366AE2-610F-4959-B720-D810D6CA6551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2B68120-F7FC-481D-807C-1DC85A70C789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2B68120-F7FC-481D-807C-1DC85A70C789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2B68120-F7FC-481D-807C-1DC85A70C789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2B68120-F7FC-481D-807C-1DC85A70C789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7531DA4-B34A-430F-A7B1-ECF5BC23585E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7531DA4-B34A-430F-A7B1-ECF5BC23585E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7531DA4-B34A-430F-A7B1-ECF5BC23585E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7531DA4-B34A-430F-A7B1-ECF5BC23585E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A8CDB9E-448C-4D9A-82CF-4E61F8239857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A8CDB9E-448C-4D9A-82CF-4E61F8239857}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A8CDB9E-448C-4D9A-82CF-4E61F8239857}.Release|Any CPU.ActiveCfg = Release|Any CPU
