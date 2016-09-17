@@ -1,4 +1,5 @@
-﻿using AOPTest.Domain.Entities;
+﻿using AOPTest.AOP;
+using AOPTest.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,11 +14,13 @@ namespace AOPTest.Data.Repositories
             _ctx = ctx;
         }
 
+        [LoggingInterceptor]
         public IEnumerable<Invoice> GetAll()
         {
             return _ctx.Invoices.ToList();
         }
 
+        [LoggingInterceptor]
         public void AddInvoice(Invoice invoice)
         {
             _ctx.Invoices.Add(invoice);

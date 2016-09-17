@@ -1,4 +1,5 @@
-﻿using AOPTest.Domain.Entities;
+﻿using AOPTest.AOP;
+using AOPTest.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace AOPTest.Domain.Services
             DiscountCaclulator = (x, y) => 0;
         }
 
+        [LoggingInterceptor]
         public Invoice CreateInvoice(IEnumerable<ItemWithQuantity> itemsWithQty)
         {
             var orders = itemsWithQty

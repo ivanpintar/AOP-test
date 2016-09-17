@@ -1,4 +1,5 @@
-﻿using AOPTest.Domain.Entities;
+﻿using AOPTest.AOP;
+using AOPTest.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,13 @@ namespace AOPTest.Data.Repositories
             _ctx.Dispose();
         }
 
+        [LoggingInterceptor]
         public IEnumerable<Item> GetAll()
         {
             return _ctx.Items.ToList();
         }
 
+        [LoggingInterceptor]
         public void AddItem(Item item)
         {
             _ctx.Items.Add(item);

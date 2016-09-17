@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AOPTest.AOP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace AOPTest.Domain.Services
 {
     public static class DiscountCalculator
     {
+
+        [LoggingInterceptor]
         public static decimal CalculateDiscount(ItemWithQuantity currentItem, IEnumerable<ItemWithQuantity> allItems)
         {
             // milk - if buying 4, pay only for 3
@@ -17,7 +20,7 @@ namespace AOPTest.Domain.Services
             }
 
             // pan - 10% on monday
-            var panDay = DayOfWeek.Monday;
+            var panDay = DayOfWeek.Saturday;
             if (currentItem.Item.Name == "Pan" && DateTime.Now.DayOfWeek == panDay)
             {
                 return (decimal)0.10;

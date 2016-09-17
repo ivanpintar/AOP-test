@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AOPTest.AOP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,11 @@ namespace AOPTest.Data.Repositories
     {
         private InvoicingContext _ctx;
 
+
+        [LoggingInterceptor]
         public IItemRepository Items { get; private set; }
+
+        [LoggingInterceptor]
         public IInvoiceRepository Invoices { get; private set; }
 
         public UnitOfWork(InvoicingContext ctx, IItemRepository itemRepo, IInvoiceRepository invoiceRepo)
@@ -21,6 +26,7 @@ namespace AOPTest.Data.Repositories
             Invoices = invoiceRepo;
         }
 
+        [LoggingInterceptor]
         public void Save()
         {
             _ctx.SaveChanges();

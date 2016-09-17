@@ -1,4 +1,5 @@
-﻿using AOPTest.Domain.Entities;
+﻿using AOPTest.AOP;
+using AOPTest.Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +18,7 @@ namespace AOPTest.Domain.Services
             };
         }
 
+        [LoggingInterceptor]
         public Order CreateOrder(ItemWithQuantity itemWithQty, decimal discount)
         {
             var item = itemWithQty.Item;

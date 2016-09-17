@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AOPTest.AOP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,14 +31,27 @@ namespace AOPTest.Domain.Entities
             Discount = discount;
             Date = DateTime.Now;
 
-            CalculateTotal();
+            TotalDiscount = CalculateTotalDiscount(item.Price, quantity, discount);
+            TotalTax = CalculateTotalTax(item.Price, quantity, TotalDiscount, tax);
+            TotalPrice = CalculateTotalPrice(item.Price, quantity, TotalDiscount, TotalTax);
         }
 
-        private void CalculateTotal()
+        [LoggingInterceptor]
+        private decimal CalculateTotalPrice(decimal price, int quantity, decimal totalDiscount, decimal totalTax)
         {
-            TotalDiscount = ItemPrice * Quantity * Discount;
-            TotalTax = (ItemPrice * Quantity - TotalDiscount) * Tax;
-            TotalPrice = ItemPrice * Quantity  - TotalDiscount + TotalTax;
+            return price * quantity - totalDiscount + TotalTax;
+        }
+
+        [LoggingInterceptor]
+        private decimal CalculateTotalTax(decimal price, int quantity, decimal totalDiscount, decimal tax)
+        {
+            return (price * quantity - totalDiscount) * tax;
+        }
+
+        [LoggingInterceptor]
+        private decimal CalculateTotalDiscount(decimal price, int quantity, decimal discount)
+        {
+            return price * quantity * discount;
         }
 
         public override string ToString()

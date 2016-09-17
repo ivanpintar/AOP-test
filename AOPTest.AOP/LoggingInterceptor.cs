@@ -1,11 +1,7 @@
 ﻿using ArxOne.MrAdvice.Advice;
-using Castle.DynamicProxy;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AOPTest.AOP
 {
@@ -16,7 +12,7 @@ namespace AOPTest.AOP
         public void Advise(MethodAdviceContext context)
         {
             var methodName = context.TargetMethod.Name;
-            var typeName = context.Target.ToString();
+            var typeName = context.TargetType.ToString();
             var args = $"[{string.Join("], [", context.Arguments.Select(x => (x ?? "").ToString()))}]";
 
             _output.WriteLine($"{DateTime.Now}: [{typeName}] Entering {methodName} with arguments: {args}");
@@ -32,7 +28,8 @@ namespace AOPTest.AOP
             }
             finally
             {
-                _output.WriteLine($"{DateTime.Now}: [{typeName}] Exiting {methodName} with result: [{(context.ReturnValue ?? "NULL")}]");
+                var returnValue = context.HasReturnValue ? context.ReturnValue : null;
+                _output.WriteLine($"{DateTime.Now}: [{typeName}] Exiting {methodName} with result: [{returnValue ?? "NULL"}]");
             }
         }
     }

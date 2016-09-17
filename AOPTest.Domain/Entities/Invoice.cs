@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AOPTest.AOP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace AOPTest.Domain.Entities
 
         }
 
+        [LoggingInterceptor]
         public Invoice(IEnumerable<Order> orders)
         {
             Orders = orders;
@@ -27,6 +29,7 @@ namespace AOPTest.Domain.Entities
             CalculateTotal();
         }
 
+        [LoggingInterceptor]
         private void CalculateTotal()
         {
             TotalPrice = Orders
