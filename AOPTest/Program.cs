@@ -33,13 +33,13 @@ namespace AOPTest
         private static void CreateContainerWithInterception()
         {
             var builder = new ContainerBuilder();
-            builder.Register(x => new AutofacInterceptor());
+            builder.Register(x => new LoggingInterceptor());
             builder.RegisterType<InvoicingContext>();
-            builder.RegisterType<InvoiceRepository>().As<IInvoiceRepository>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<ItemRepository>().As<IItemRepository>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<OrderCreatorService>().As<IOrderCreatorService>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<InvoiceCreatorService>().As<IInvoiceCreatorService>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
+            builder.RegisterType<InvoiceRepository>().As<IInvoiceRepository>().EnableInterfaceInterceptors().InterceptedBy(typeof(LoggingInterceptor));
+            builder.RegisterType<ItemRepository>().As<IItemRepository>().EnableInterfaceInterceptors().InterceptedBy(typeof(LoggingInterceptor));
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().EnableInterfaceInterceptors().InterceptedBy(typeof(LoggingInterceptor));
+            builder.RegisterType<OrderCreatorService>().As<IOrderCreatorService>().EnableInterfaceInterceptors().InterceptedBy(typeof(LoggingInterceptor));
+            builder.RegisterType<InvoiceCreatorService>().As<IInvoiceCreatorService>().EnableInterfaceInterceptors().InterceptedBy(typeof(LoggingInterceptor));
 
             _container = builder.Build();
         }
