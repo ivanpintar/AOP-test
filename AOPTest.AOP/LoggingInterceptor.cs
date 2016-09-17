@@ -1,4 +1,5 @@
-﻿using Castle.DynamicProxy;
+﻿using ArxOne.MrAdvice.Advice;
+using Castle.DynamicProxy;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace AOPTest.AOP
 {
-    public class AutofacInterceptor : IInterceptor
+    public class LoggingInterceptor : Attribute, IMethodAdvice
     {
         private TextWriter _output = Console.Out;
 
-        public void Intercept(IInvocation invocation)
+        public void Advise(MethodAdviceContext context)
         {
-            var methodName = invocation.Method.Name;
-            var typeName = invocation.InvocationTarget.ToString();
-            var args = $"[{string.Join("], [", invocation.Arguments.Select(x => (x ?? "").ToString()))}]";
+            var methodName = context.TargetMethod.Name;
+            var typeName = context.Target.ToString();
+            var args = $"[{string.Join("], [", context.Arguments.Select(x => (x ?? "").ToString()))}]";
 
             _output.WriteLine($"{DateTime.Now}: [{typeName}] Entering {methodName} with arguments: {args}");
 
             try
             {
-                invocation.Proceed();
+                context.Proceed();
             }
             catch (Exception ex)
             {
@@ -31,7 +32,7 @@ namespace AOPTest.AOP
             }
             finally
             {
-                _output.WriteLine($"{DateTime.Now}: [{typeName}] Exiting {methodName} with result: [{(invocation.ReturnValue ?? "NULL")}]");
+                _output.WriteLine($"{DateTime.Now}: [{typeName}] Exiting {methodName} with result: [{(context.ReturnValue ?? "NULL")}]");
             }
         }
     }

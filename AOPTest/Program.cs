@@ -17,8 +17,7 @@ namespace AOPTest
 
         static void Main(string[] args)
         {
-            CreateContainerWithInterception();
-            //CreateContainerWithNoInterception();
+            CreateContainer();
 
             var invoiceSvc = _container.Resolve<IInvoiceCreatorService>();
             invoiceSvc.DiscountCaclulator = DiscountCalculator.CalculateDiscount;
@@ -30,21 +29,7 @@ namespace AOPTest
             Console.ReadKey();
         }
 
-        private static void CreateContainerWithInterception()
-        {
-            var builder = new ContainerBuilder();
-            builder.Register(x => new AutofacInterceptor());
-            builder.RegisterType<InvoicingContext>();
-            builder.RegisterType<InvoiceRepository>().As<IInvoiceRepository>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<ItemRepository>().As<IItemRepository>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<OrderCreatorService>().As<IOrderCreatorService>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-            builder.RegisterType<InvoiceCreatorService>().As<IInvoiceCreatorService>().EnableInterfaceInterceptors().InterceptedBy(typeof(AutofacInterceptor));
-
-            _container = builder.Build();
-        }
-
-        private static void CreateContainerWithNoInterception()
+        private static void CreateContainer()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<InvoicingContext>();
