@@ -7,7 +7,6 @@ namespace AOPTest.Data.Repositories
         IInvoiceRepository Invoices { get; }
         IItemRepository Items { get; }
 
-        void Dispose();
         void Save();
     }
 }

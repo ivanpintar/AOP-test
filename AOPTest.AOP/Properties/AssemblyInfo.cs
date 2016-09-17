@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AOPTest.Helpers")]
+[assembly: AssemblyTitle("AOPTest.AOP")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AOPTest.Helpers")]
+[assembly: AssemblyProduct("AOPTest.AOP")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c7531da4-b34a-430f-a7b1-ecf5bc23585e")]
+[assembly: Guid("58d3d93c-ec20-4b68-9d65-3dd3c9a5c654")]
 
 // Version information for an assembly consists of the following four values:
 //

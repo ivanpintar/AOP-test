@@ -1,18 +1,16 @@
 ﻿using Castle.DynamicProxy;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AOPTest.AutofacInterception.AOP
+namespace AOPTest.AOP
 {
-    public class LoggingInterceptor : IInterceptor
+    public class AutofacInterceptor : IInterceptor
     {
-        private TextWriter _output;
-
-        public LoggingInterceptor(TextWriter output)
-        {
-            _output = output;
-        }
+        private TextWriter _output = Console.Out;
 
         public void Intercept(IInvocation invocation)
         {
