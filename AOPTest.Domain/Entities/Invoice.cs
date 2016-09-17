@@ -10,36 +10,34 @@ namespace AOPTest.Domain.Entities
     public class Invoice
     {
         public int Id { get; private set; }
-        public IEnumerable<Order> Orders { get; private set; }
+        public virtual ICollection<Order> Orders { get; private set; }
 
         public DateTime Date { get; private set; }
 
-        public decimal TotalPrice { get; private set; }
+        [LoggingInterceptor]
+        public decimal TotalPrice { get { return CalculateTotal(Orders); } }
 
-        private Invoice()
+        protected Invoice()
         {
 
         }
 
-        [LoggingInterceptor]
         public Invoice(IEnumerable<Order> orders)
         {
-            Orders = orders;
+            Orders = orders.ToList();
             Date = DateTime.Now;
-            CalculateTotal();
         }
 
-        [LoggingInterceptor]
-        private void CalculateTotal()
+        private decimal CalculateTotal(IEnumerable<Order> orders)
         {
-            TotalPrice = Orders
+            return orders
                 .Select(x => x.TotalPrice)
                 .Sum();
         }
 
         public override string ToString()
         {
-            return $"{GetType().Name} Id:{Id} TotalPrice:{TotalPrice}";
+            return $"Invoice Id:{Id} TotalPrice:{TotalPrice}";
         }
     }
 }

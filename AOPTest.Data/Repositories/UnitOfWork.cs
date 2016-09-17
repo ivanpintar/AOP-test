@@ -12,10 +12,8 @@ namespace AOPTest.Data.Repositories
         private InvoicingContext _ctx;
 
 
-        [LoggingInterceptor]
         public IItemRepository Items { get; private set; }
 
-        [LoggingInterceptor]
         public IInvoiceRepository Invoices { get; private set; }
 
         public UnitOfWork(InvoicingContext ctx, IItemRepository itemRepo, IInvoiceRepository invoiceRepo)

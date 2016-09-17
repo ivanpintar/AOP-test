@@ -8,18 +8,13 @@ using System.Threading.Tasks;
 
 namespace AOPTest.Data.Repositories
 {
-    public class ItemRepository : IDisposable, IItemRepository
+    public class ItemRepository : IItemRepository
     {
         private InvoicingContext _ctx;
 
         public ItemRepository(InvoicingContext ctx)
         {
             _ctx = ctx;
-        }
-
-        public void Dispose()
-        {
-            _ctx.Dispose();
         }
 
         [LoggingInterceptor]
@@ -29,7 +24,7 @@ namespace AOPTest.Data.Repositories
         }
 
         [LoggingInterceptor]
-        public void AddItem(Item item)
+        public void Add(Item item)
         {
             _ctx.Items.Add(item);
         }

@@ -21,7 +21,7 @@ namespace AOPTest.Data.Repositories
         }
 
         [LoggingInterceptor]
-        public void AddInvoice(Invoice invoice)
+        public void Add(Invoice invoice)
         {
             _ctx.Invoices.Add(invoice);
         }

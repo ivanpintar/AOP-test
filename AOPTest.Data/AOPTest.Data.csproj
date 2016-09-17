@@ -60,6 +60,18 @@
     <Compile Include="Migrations\201609120939439_Base.Designer.cs">
       <DependentUpon>201609120939439_Base.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609172115418_AddOrdersToInvoice.cs" />
+    <Compile Include="Migrations\201609172115418_AddOrdersToInvoice.Designer.cs">
+      <DependentUpon>201609172115418_AddOrdersToInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609172153104_RemoveTotalPricePropFromInvoice.cs" />
+    <Compile Include="Migrations\201609172153104_RemoveTotalPricePropFromInvoice.Designer.cs">
+      <DependentUpon>201609172153104_RemoveTotalPricePropFromInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609172157250_RemovedCalculatedPropsFromOrder.cs" />
+    <Compile Include="Migrations\201609172157250_RemovedCalculatedPropsFromOrder.Designer.cs">
+      <DependentUpon>201609172157250_RemovedCalculatedPropsFromOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IInvoiceRepository.cs" />
@@ -89,6 +101,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609120939439_Base.resx">
       <DependentUpon>201609120939439_Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609172115418_AddOrdersToInvoice.resx">
+      <DependentUpon>201609172115418_AddOrdersToInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609172153104_RemoveTotalPricePropFromInvoice.resx">
+      <DependentUpon>201609172153104_RemoveTotalPricePropFromInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609172157250_RemovedCalculatedPropsFromOrder.resx">
+      <DependentUpon>201609172157250_RemovedCalculatedPropsFromOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

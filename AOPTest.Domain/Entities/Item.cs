@@ -14,7 +14,7 @@ namespace AOPTest.Domain.Entities
         public string Name { get; private set; }
         public decimal Price { get; private set; }
 
-        private Item()
+        protected Item()
         {
 
         }
@@ -28,7 +28,7 @@ namespace AOPTest.Domain.Entities
 
         public override string ToString()
         {
-            return $"{GetType().Name} Id:{Id} Item:{Name} Price:{Price} Type:{Type}";
+            return $"Item Id:{Id} Item:{Name} Price:{Price} Type:{Type}";
         }
     }
 }
