@@ -18,7 +18,7 @@ namespace AOPTest.Data.Repositories
             return _ctx.Invoices.ToList();
         }
 
-        public void AddInvoice(Invoice invoice)
+        public void Add(Invoice invoice)
         {
             _ctx.Invoices.Add(invoice);
         }

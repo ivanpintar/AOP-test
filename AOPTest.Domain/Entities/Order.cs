@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AOPTest.Domain.Entities
 {
@@ -13,13 +9,13 @@ namespace AOPTest.Domain.Entities
         public decimal ItemPrice { get; private set; }
         public int Quantity { get; private set; }
         public decimal Tax { get; private set; }
-        public decimal TotalPrice { get; private set; }
-        public decimal TotalTax { get; private set; }
-        public decimal TotalDiscount { get; private set; }
+        public decimal TotalPrice { get { return CalculateTotalPrice(); } }
+        public decimal TotalTax { get { return CalculateTotalTax(); } }
+        public decimal TotalDiscount { get { return CalculateTotalDiscount(); } }
         public DateTime Date { get; private set; }
         public decimal Discount { get; internal set; }
 
-        private Order() { }
+        protected Order() { }
 
         public Order(Item item, int quantity, decimal tax, decimal discount)
         {
@@ -29,20 +25,26 @@ namespace AOPTest.Domain.Entities
             Tax = tax;
             Discount = discount;
             Date = DateTime.Now;
-
-            CalculateTotal();
         }
 
-        private void CalculateTotal()
+        private decimal CalculateTotalPrice()
         {
-            TotalDiscount = ItemPrice * Quantity * Discount;
-            TotalTax = (ItemPrice * Quantity - TotalDiscount) * Tax;
-            TotalPrice = ItemPrice * Quantity  - TotalDiscount + TotalTax;
+            return ItemPrice * Quantity - CalculateTotalDiscount() + CalculateTotalTax();
+        }
+
+        private decimal CalculateTotalTax()
+        {
+            return (ItemPrice * Quantity - CalculateTotalDiscount()) * Tax;
+        }
+
+        private decimal CalculateTotalDiscount()
+        {
+            return ItemPrice * Quantity * Discount;
         }
 
         public override string ToString()
         {
-            return $"{GetType().Name} Id:{Id} ItemName:{ItemName} ItemPrice:{ItemPrice} TotalPrice:{TotalPrice}";
+            return $"Order Id:{Id} ItemName:{ItemName} ItemPrice:{ItemPrice} TotalPrice:{TotalPrice}";
         }
     }
 }

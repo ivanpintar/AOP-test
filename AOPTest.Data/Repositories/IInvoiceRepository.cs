@@ -5,7 +5,7 @@ namespace AOPTest.Data.Repositories
 {
     public interface IInvoiceRepository
     {
-        void AddInvoice(Invoice invoice);
+        void Add(Invoice invoice);
         IEnumerable<Invoice> GetAll();
     }
 }

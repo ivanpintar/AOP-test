@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AOPTest.Data.Repositories
 {
-    public class ItemRepository : IDisposable, IItemRepository
+    public class ItemRepository : IItemRepository
     {
         private InvoicingContext _ctx;
 
@@ -16,17 +16,12 @@ namespace AOPTest.Data.Repositories
             _ctx = ctx;
         }
 
-        public void Dispose()
-        {
-            _ctx.Dispose();
-        }
-
         public IEnumerable<Item> GetAll()
         {
             return _ctx.Items.ToList();
         }
 
-        public void AddItem(Item item)
+        public void Add(Item item)
         {
             _ctx.Items.Add(item);
         }

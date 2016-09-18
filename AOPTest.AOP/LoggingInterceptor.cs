@@ -10,15 +10,29 @@ namespace AOPTest.AOP
 {
     public class LoggingInterceptor : IInterceptor
     {
-        private TextWriter _output = Console.Out;
+        private static string _logFile = "log.txt";
+        private static TextWriter _output;
 
+        private static TextWriter Output
+        {
+            get
+            {
+                // reset the log file on each run
+                if (_output == null)
+                {
+                    File.Delete(_logFile);
+                    _output = File.CreateText(_logFile);
+                }
+                return _output;
+            }
+        }
         public void Intercept(IInvocation invocation)
         {
             var methodName = invocation.Method.Name;
-            var typeName = invocation.InvocationTarget.ToString();
-            var args = $"[{string.Join("], [", invocation.Arguments.Select(x => (x ?? "").ToString()))}]";
+            var typeName = invocation.TargetType.ToString();
+            var args = $"[{string.Join("], [", invocation.Arguments.Select(GetObjectType))}]";
 
-            _output.WriteLine($"{DateTime.Now}: [{typeName}] Entering {methodName} with arguments: {args}");
+            Output.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}: [{typeName}] Entering {methodName} with arguments: {args}");
 
             try
             {
@@ -26,13 +40,51 @@ namespace AOPTest.AOP
             }
             catch (Exception ex)
             {
-                _output.WriteLine($"{DateTime.Now}: [{typeName}] Method {methodName} threw exception {ex.GetType().Name}: {ex.Message}");
+                Output.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}: [{typeName}] Method {methodName} threw exception {ex.GetType().Name}: {ex.Message}");
                 throw;
             }
             finally
             {
-                _output.WriteLine($"{DateTime.Now}: [{typeName}] Exiting {methodName} with result: [{(invocation.ReturnValue ?? "NULL")}]");
+                var returnValue = invocation.ReturnValue;
+                Output.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}: [{typeName}] Exiting {methodName} with result: [{GetObjectType(returnValue)}]");
             }
+
+            Output.Flush();
+        }
+
+        private string GetObjectType(object value)
+        {
+            if (value == null)
+            {
+                return "NULL";
+            }
+
+            var type = value.GetType();
+
+            var enumerableType = GetEnumerableType(type);
+
+            if (enumerableType != null)
+            {
+                return $"Enumerable of {enumerableType.FullName}";
+            }
+            else
+            {
+                return $"{type.FullName}:{value.ToString()}";
+            }
+        }
+
+        private Type GetEnumerableType(Type type)
+        {
+            foreach (Type intType in type.GetInterfaces())
+            {
+                if (intType.IsGenericType
+                    && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                {
+                    return intType.GetGenericArguments()[0];
+                }
+            }
+            return null;
+
         }
     }
 }
